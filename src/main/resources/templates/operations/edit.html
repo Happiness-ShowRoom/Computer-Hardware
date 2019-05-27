@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"></head>
+<body>
+<div class="container">
+    <div th:replace="fragments/header :: header"></div>
+    <div class="container">
+        <form class="form-horizontal" th:object="${product}" th:action="@{/update}" name="edit_form" id="edit_form"
+              method="post" role="form">
+            <div class="form-group">
+                <input type="hidden" id="id" th:name="id" th:value="*{id}"/>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="name" th:name="name" th:value="*{name}" maxlength="100" style="width: 400px"/>
+            </div>
+
+            <div class="form-group">
+                <input type="number" value="1" min="0" class="form-control" id="quantity" th:name="quantity" th:value="*{quantity}" style="width: 100px" />
+            </div>
+            <div class="form-group">
+                <div class="form-check">
+                    <input th:if="${product.necessary}" class="form-check-input" type="checkbox" id="necessary" checked="checked" th:name="necessary"/>
+                    <input th:unless="${product.necessary}" class="form-check-input" type="checkbox" id="necessary" th:name="necessary"/>
+                    <label class="form-check-label" for="necessary">
+                        Crucial?
+                    </label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
